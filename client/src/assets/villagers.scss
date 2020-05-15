@@ -8,16 +8,33 @@
         display: flex;
         margin: 10px 0;
         padding: 20px;
-        width: 200px;
+        width: 400px;
 
         &:not(:last-child) {
             margin-right: 20px;
         }
 
         &-content {
-            width: 150px;
+            width: 250px;
             text-align: left;
             padding: 0 20px;
+        }
+
+        &-name {
+            display: flex;
+            justify-content: space-between;
+
+            div:first-child {
+                font-weight: bold;
+            }
+        }
+
+        &-image {
+            width: 150px;
+
+            &--img {
+                width: 100%;
+            }
         }
     }
 

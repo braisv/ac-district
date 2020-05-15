@@ -8,7 +8,7 @@
         :key="index"
       >
         <div class="villagers__card-image">
-          <img :src="getImages(villager.id)" alt="IMG">
+          <img :src="getImages(villager.id)" alt="IMG" class="villagers__card-image--img">
         </div>
         <div class="villagers__card-content">
           <div class="villagers__card-name">
