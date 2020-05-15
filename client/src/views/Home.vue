@@ -8,7 +8,7 @@
         :key="index"
       >
         <div class="villagers__card-image">
-          <img :src="img" alt="IMG">
+          <img :src="getImages(villager.id)" alt="IMG">
         </div>
         <div class="villagers__card-content">
           <div class="villagers__card-name">
@@ -67,19 +67,9 @@ export default {
         })
         .catch((err) => console.log(err));
     },
-    getImages() {
-      if (!this.villagers[1]) {
-        this.axios
-          .get("/images/villagers/1")
-          .then((res) => {
-            console.log(res);
-            this.img = res;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+    getImages(id) {
+      return `https://acnhapi.com/images/villagers/${id}`
       }
-    },
   },
 };
 </script>
