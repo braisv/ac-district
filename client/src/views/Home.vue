@@ -20,7 +20,7 @@
         </div>
 
         <div class="villagers__card-image">
-          {{ villager.image }}
+          ...
         </div>
       </div>
     </div>
@@ -39,27 +39,15 @@ export default {
     this.getVillagers();
   },
   methods: {
-    async getVillagers() {
-      let doc = await this.axios
+    getVillagers() {
+      this.axios
         .get("/villagers")
         .then((res) => {
-          return res.data;
+          this.villagers = res.data;
+          console.log(res);
+          console.log("VILLAGERS: ", this.villagers);
         })
         .catch((err) => console.log(err));
-
-      doc.map(async (el) => {
-        let img = await this.axios
-          .get(`/images/villagers/${el.id}`)
-          .then((resp) => {
-            return resp.data;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        el.img = img;
-      });
-      this.villagers = doc;
-      console.log("VILLAGERS: ", this.villagers);
     },
   },
 };
