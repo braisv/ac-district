@@ -1,0 +1,25 @@
+.villagers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    &__card {
+        background-color: #fabada;
+        display: flex;
+        margin: 10px 0;
+        padding: 20px;
+        width: 200px;
+
+        &:not(:last-child) {
+            margin-right: 20px;
+        }
+
+        &-content {
+            width: 150px;
+            text-align: left;
+            padding: 0 20px;
+        }
+    }
+
+    
+}
