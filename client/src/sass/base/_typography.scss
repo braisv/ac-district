@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300;400;500;600;700;800;900&display=swap");
+
+*,
+*::after,
+*::before {
+  font-family: "Darker Grotesque", sans-serif;
+}
+
+body {
+  font-family: "Darker Grotesque", sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  color: grey;
+}
+
+.heading-primary {
+  font-family: "Darker Grotesque", sans-serif;
+  backface-visibility: hidden;
+
+  &--main {
+    color: $color-primary-dark;
+    background-color: $color-primary-light;
+    border-radius: 10px;
+    box-shadow: 1px 5px 50px rgba(0, 0, 0, 0.1);
+    padding: 2rem 4rem;
+    display: block;
+    font-size: 6rem;
+    font-weight: bold;
+    letter-spacing: 1.5rem;
+    animation: 10s turbulenceLeft infinite ease-out;
+  }
+
+  &--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.74rem;
+    animation: 5s turbulenceRight infinite ease-out;
+  }
+}
+
+.paragraph {
+  font-size: 1.4rem;
+
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+}
