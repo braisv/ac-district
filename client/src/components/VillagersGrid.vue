@@ -2,7 +2,7 @@
   <div class="villagers">
     <div
       class="villagers__grid"
-      v-for="(villager, index) in villagers"
+      v-for="(villager, index) in filteredResults"
       :key="index"
     >
       <div class="villagers__grid-image">

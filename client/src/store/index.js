@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 import axios from "axios";
 import VueAxios from "vue-axios";
@@ -13,35 +13,62 @@ axios.defaults.baseURL = "http://acnhapi.com";
 export default new Vuex.Store({
   state: {
     villagers: [],
-    filteredResults: []
+    filteredResults: [],
   },
   mutations: {
     villagersAPI(state, payload) {
-      state.villagers = payload
+      state.villagers = payload;
     },
     filterUpdate(state, payload) {
-      state.filteredResults = payload
-      console.log("FILTER RESULTS: ", state.filteredResults)
-    }
+      state.filteredResults = payload;
+    },
   },
   actions: {
     getVillagers({ commit }) {
       axios
         .get("/villagers")
         .then((res) => {
-          commit('villagersAPI', res.data)
+          commit("villagersAPI", res.data);
+          commit("filterUpdate", res.data);
         })
         .catch((err) => console.log(err));
     },
     filterVillagers({ commit }, payload) {
-      console.log("FILTER PAYLOAD: ", payload.target.value)
+      let result = [];
       for (let item in this.state.villagers) {
-        console.log("VILLAGER: ")
-          if (this.state.villagers[item].name["name-sp"].includes(payload.target.value))
-          commit('filterUpdate', this.state.villagers[item])
+        if (
+          this.state.villagers[item].name["name-sp"]
+            .toLowerCase()
+            .includes(payload.target.value.toLowerCase())
+        )
+          result.push(this.state.villagers[item]);
       }
-    }
+      commit("filterUpdate", result);
+    },
+    findPersonality({ commit }, payload) {
+      let result = [];
+      for (let item in this.state.villagers) {
+        if (
+          this.state.villagers[item].personality
+            .toLowerCase()
+            .includes(payload.target.value.toLowerCase())
+        )
+          result.push(this.state.villagers[item]);
+      }
+      commit("filterUpdate", result);
+    },
+    findSpecies({ commit }, payload) {
+      let result = [];
+      for (let item in this.state.villagers) {
+        if (
+          this.state.villagers[item].species
+            .toLowerCase()
+            .includes(payload.target.value.toLowerCase())
+        )
+          result.push(this.state.villagers[item]);
+      }
+      commit("filterUpdate", result);
+    },
   },
-  modules: {
-  }
-})
+  modules: {},
+});
