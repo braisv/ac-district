@@ -24,31 +24,21 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+
 export default {
   name: "Villagers",
-  data() {
-    return {
-      villagers: [],
-      img: "https://acnhapi.com/images/villagers/4",
-    };
-  },
   created() {
     this.getVillagers();
   },
+  computed: {
+    ...mapState(["villagers"]),
+  },
   methods: {
-    getVillagers() {
-      this.axios
-        .get("/villagers")
-        .then((res) => {
-          this.villagers = res.data;
-          console.log(res);
-          console.log("VILLAGERS: ", this.villagers);
-        })
-        .catch((err) => console.log(err));
-    },
+    ...mapActions(["getVillagers"]),
     getImages(id) {
-      return `https://acnhapi.com/images/villagers/${id}`
-      }
+      return `https://acnhapi.com/images/villagers/${id}`;
+    },
   },
 };
 </script>
