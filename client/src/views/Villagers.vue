@@ -1,44 +1,20 @@
 <template>
-  <div class="villagers">
-    <div
-      class="villagers__grid"
-      v-for="(villager, index) in villagers"
-      :key="index"
-    >
-      <div class="villagers__grid-image">
-        <img
-          :src="getImages(villager.id)"
-          alt="IMG"
-          class="villagers__grid-image--img"
-        />
-      </div>
-      <div class="villagers__grid-content">
-        <div class="villagers__grid-name">
-          <div class="villagers__grid-name__spanish">
-            {{ villager.name["name-sp"] }}
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="section-villagers">
+    <FilterGrid />
+    <VillagersGrid />
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
+import VillagersGrid from "@/components/VillagersGrid.vue";
+import FilterGrid from "@/components/FilterGrid.vue";
 
 export default {
   name: "Villagers",
-  created() {
-    this.getVillagers();
-  },
-  computed: {
-    ...mapState(["villagers"]),
-  },
-  methods: {
-    ...mapActions(["getVillagers"]),
-    getImages(id) {
-      return `https://acnhapi.com/images/villagers/${id}`;
-    },
+  components: {
+    FilterGrid,
+    VillagersGrid,
   },
 };
 </script>

@@ -9,8 +9,9 @@
 @import "base/utilities";
 
 @import "components/cover";
+@import "components/filtergrid";
 @import "components/navbar";
-@import "components/villagers";
+@import "components/villagers-grid";
 
 @import "layout/footer";
 @import "layout/header";
@@ -18,3 +19,4 @@
 @import "layout/navigation";
 
 @import "pages/home";
+@import "pages/villagers";
