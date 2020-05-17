@@ -12,11 +12,16 @@ axios.defaults.baseURL = "http://acnhapi.com";
 
 export default new Vuex.Store({
   state: {
-    villagers: []
+    villagers: [],
+    filteredResults: []
   },
   mutations: {
     villagersAPI(state, payload) {
       state.villagers = payload
+    },
+    filterUpdate(state, payload) {
+      state.filteredResults = payload
+      console.log("FILTER RESULTS: ", state.filteredResults)
     }
   },
   actions: {
@@ -25,9 +30,16 @@ export default new Vuex.Store({
         .get("/villagers")
         .then((res) => {
           commit('villagersAPI', res.data)
-          console.log(res.data);
         })
         .catch((err) => console.log(err));
+    },
+    filterVillagers({ commit }, payload) {
+      console.log("FILTER PAYLOAD: ", payload.target.value)
+      for (let item in this.state.villagers) {
+        console.log("VILLAGER: ")
+          if (this.state.villagers[item].name["name-sp"].includes(payload.target.value))
+          commit('filterUpdate', this.state.villagers[item])
+      }
     }
   },
   modules: {

@@ -32,7 +32,7 @@ export default {
     this.getVillagers();
   },
   computed: {
-    ...mapState(["villagers"]),
+    ...mapState(["villagers", "filteredResults"]),
   },
   methods: {
     ...mapActions(["getVillagers"]),

@@ -8,6 +8,7 @@
           class="form__input"
           id="name"
           placeholder="Villager name"
+          v-on:keyup="(e) => filterVillagers(e)"
         />
       </div>
       <div class="form__group">
@@ -39,7 +40,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "FilterGrid",
   data() {
@@ -53,6 +54,7 @@ export default {
     this.getSpecies();
   },
   methods: {
+    ...mapActions(["filterVillagers"]),
     getPersonalities() {
       for (let item in this.villagers) {
         if (this.personalities.indexOf(this.villagers[item].personality) === -1)
