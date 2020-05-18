@@ -13,7 +13,7 @@
       </div>
       <div class="form__group">
         <label for="personality" class="form__label">Personality</label>
-        <select name="personality" id="personality" class="form__select" @change="(e) => findPersonality(e)">
+        <select name="personality" id="personality" class="form__select" @change="(e) => filterVillagers(e)">
           <option value="" default>Cualquiera</option>
           <option
             v-for="(personality, index) in personalities"
@@ -25,7 +25,7 @@
       </div>
       <div class="form__group">
         <label for="species" class="form__label">Species</label>
-        <select name="species" id="species" class="form__select"  @change="(e) => findSpecies(e)">
+        <select name="species" id="species" class="form__select"  @change="(e) => filterVillagers(e)">
           <option value="" default>Cualquiera</option>
           <option
             v-for="(animal, index) in species"
@@ -47,6 +47,11 @@ export default {
     return {
       personalities: [],
       species: [],
+      search: {
+        name: "",
+        personality: [],
+        species: []
+      }
     };
   },
   created() {
@@ -54,7 +59,7 @@ export default {
     this.getSpecies();
   },
   methods: {
-    ...mapActions(["filterVillagers", "findPersonality", "findSpecies"]),
+    ...mapActions(["filterVillagers"]),
     getPersonalities() {
       for (let item in this.villagers) {
         if (this.personalities.indexOf(this.villagers[item].personality) === -1)

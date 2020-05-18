@@ -14,6 +14,11 @@ export default new Vuex.Store({
   state: {
     villagers: [],
     filteredResults: [],
+    filterSearch: {
+      name: "",
+      personality: [],
+      species: [],
+    },
   },
   mutations: {
     villagersAPI(state, payload) {
@@ -21,6 +26,9 @@ export default new Vuex.Store({
     },
     filterUpdate(state, payload) {
       state.filteredResults = payload;
+    },
+    updateSearch(state, payload) {
+      state.filterSearch = payload;
     },
   },
   actions: {
@@ -33,39 +41,67 @@ export default new Vuex.Store({
         })
         .catch((err) => console.log(err));
     },
-    filterVillagers({ commit }, payload) {
+    filterVillagers({ commit, dispatch }, payload) {
+      let result = this.state.filterSearch;
+      if (payload.target.id === "name") {
+        result.name = payload.target.value;
+        // for (let item in this.state.villagers) {
+        //   if (
+        //     this.state.villagers[item].name["name-sp"]
+        //       .toLowerCase()
+        //       .includes(payload.target.value.toLowerCase())
+        //   )
+        //     result.push(this.state.villagers[item]);
+        // }
+      }
+      if (payload.target.id === "personality") {
+        result.personality.push(payload.target.value);
+        // for (let item in this.state.villagers) {
+        //   if (
+        //     this.state.villagers[item].personality
+        //       .toLowerCase()
+        //       .includes(payload.target.value.toLowerCase())
+        //   )
+        //     result.push(this.state.villagers[item]);
+        // }
+      }
+      if (payload.target.id === "species") {
+        result.species.push(payload.target.value);
+        // for (let item in this.state.villagers) {
+        //   if (
+        //     this.state.villagers[item].species
+        //       .toLowerCase()
+        //       .includes(payload.target.value.toLowerCase())
+        //   )
+        //     result.push(this.state.villagers[item]);
+        // }
+      }
+      commit("updateSearch", result);
+      dispatch("findResults");
+    },
+    findResults({ commit }) {
       let result = [];
+      const search = this.state.filterSearch;
       for (let item in this.state.villagers) {
         if (
           this.state.villagers[item].name["name-sp"]
             .toLowerCase()
-            .includes(payload.target.value.toLowerCase())
-        )
-          result.push(this.state.villagers[item]);
-      }
-      commit("filterUpdate", result);
-    },
-    findPersonality({ commit }, payload) {
-      let result = [];
-      for (let item in this.state.villagers) {
-        if (
-          this.state.villagers[item].personality
-            .toLowerCase()
-            .includes(payload.target.value.toLowerCase())
-        )
-          result.push(this.state.villagers[item]);
-      }
-      commit("filterUpdate", result);
-    },
-    findSpecies({ commit }, payload) {
-      let result = [];
-      for (let item in this.state.villagers) {
-        if (
-          this.state.villagers[item].species
-            .toLowerCase()
-            .includes(payload.target.value.toLowerCase())
-        )
-          result.push(this.state.villagers[item]);
+            .includes(search.name.toLowerCase())
+        ) {
+          if (
+            search.personality.includes(
+              this.state.villagers[item].personality
+            ) ||
+            search.personality.length === 0
+          ) {
+            if (
+              search.species.includes(this.state.villagers[item].species) ||
+              search.species.length === 0
+            ) {
+              result.push(this.state.villagers[item]);
+            }
+          }
+        }
       }
       commit("filterUpdate", result);
     },
