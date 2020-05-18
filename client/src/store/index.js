@@ -45,36 +45,14 @@ export default new Vuex.Store({
       let result = this.state.filterSearch;
       if (payload.target.id === "name") {
         result.name = payload.target.value;
-        // for (let item in this.state.villagers) {
-        //   if (
-        //     this.state.villagers[item].name["name-sp"]
-        //       .toLowerCase()
-        //       .includes(payload.target.value.toLowerCase())
-        //   )
-        //     result.push(this.state.villagers[item]);
-        // }
       }
       if (payload.target.id === "personality") {
+        result.personality = []
         result.personality.push(payload.target.value);
-        // for (let item in this.state.villagers) {
-        //   if (
-        //     this.state.villagers[item].personality
-        //       .toLowerCase()
-        //       .includes(payload.target.value.toLowerCase())
-        //   )
-        //     result.push(this.state.villagers[item]);
-        // }
       }
       if (payload.target.id === "species") {
+        result.species = []
         result.species.push(payload.target.value);
-        // for (let item in this.state.villagers) {
-        //   if (
-        //     this.state.villagers[item].species
-        //       .toLowerCase()
-        //       .includes(payload.target.value.toLowerCase())
-        //   )
-        //     result.push(this.state.villagers[item]);
-        // }
       }
       commit("updateSearch", result);
       dispatch("findResults");
