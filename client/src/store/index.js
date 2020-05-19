@@ -12,6 +12,7 @@ axios.defaults.baseURL = "http://acnhapi.com";
 
 export default new Vuex.Store({
   state: {
+    loading: false,
     villagers: [],
     filteredResults: [],
     filterSearch: {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    loadData(state, payload) {
+      state.loading = payload
+    },
     villagersAPI(state, payload) {
       state.villagers = payload;
     },
@@ -33,9 +37,11 @@ export default new Vuex.Store({
   },
   actions: {
     getVillagers({ commit }) {
+      commit('loadData', true);
       axios
         .get("/villagers")
         .then((res) => {
+          commit('loadData', false);
           commit("villagersAPI", res.data);
           commit("filterUpdate", res.data);
         })

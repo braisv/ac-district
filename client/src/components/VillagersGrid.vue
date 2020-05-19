@@ -24,18 +24,14 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "VillagersGrid",
-  created() {
-    this.getVillagers();
-  },
   computed: {
     ...mapState(["villagers", "filteredResults"]),
   },
   methods: {
-    ...mapActions(["getVillagers"]),
     getImages(id) {
       return `https://acnhapi.com/images/villagers/${id}`;
     },
