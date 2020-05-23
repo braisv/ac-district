@@ -14,6 +14,7 @@ export default new Vuex.Store({
   state: {
     loading: false,
     villagers: [],
+    villager: {},
     filteredResults: [],
     filterSearch: {
       name: "",
@@ -25,7 +26,13 @@ export default new Vuex.Store({
     loadData(state, payload) {
       state.loading = payload
     },
+    getOneVillager(state, payload) {
+      state.villager = payload;
+    },
     villagersAPI(state, payload) {
+      state.villagers = payload;
+    },
+    fishesAPI(state, payload) {
       state.villagers = payload;
     },
     filterUpdate(state, payload) {
@@ -36,6 +43,16 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    getVillager({ commit }, id) {
+      commit('loadData', true);
+      axios
+        .get(`/villagers/${id}`)
+        .then((res) => {
+          commit('loadData', false);
+          commit("getOneVillager", res.data);
+        })
+        .catch((err) => console.log(err));
+    },
     getVillagers({ commit }) {
       commit('loadData', true);
       axios
@@ -43,6 +60,17 @@ export default new Vuex.Store({
         .then((res) => {
           commit('loadData', false);
           commit("villagersAPI", res.data);
+          commit("filterUpdate", res.data);
+        })
+        .catch((err) => console.log(err));
+    },
+    getFishes({ commit }) {
+      commit('loadData', true);
+      axios
+        .get("/fish")
+        .then((res) => {
+          commit('loadData', false);
+          commit("fishesAPI", res.data);
           commit("filterUpdate", res.data);
         })
         .catch((err) => console.log(err));

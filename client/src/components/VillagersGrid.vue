@@ -1,6 +1,7 @@
 <template>
   <div class="villagers">
-    <div
+    <router-link
+      :to="{ name: 'Villager', params: { id: villager.id } }"
       class="villagers__grid"
       v-for="(villager, index) in filteredResults"
       :key="index"
@@ -19,7 +20,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -29,11 +30,13 @@ import { mapState } from "vuex";
 export default {
   name: "VillagersGrid",
   computed: {
-    ...mapState(["villagers", "filteredResults"]),
+    ...mapState(["filteredResults"]),
   },
   methods: {
     getImages(id) {
-      return `https://acnhapi.com/images/villagers/${id}`;
+      console.log('FISHES IMAGES: ', this.filteredResults.anchovy)
+      if (this.filteredResults.anchovy) return `https://acnhapi.com/images/fish/${id}`;
+      if (!this.filteredResults.anchovy) return `https://acnhapi.com/images/villagers/${id}`;
     },
   },
 };

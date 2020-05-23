@@ -2,7 +2,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 0 auto;
   margin-top: 15rem;
+  max-width: 1200px;
 
   &__grid {
     background-color: $color-secondary;
@@ -32,11 +34,20 @@
       color: $color-primary-light;
       transition: all 0.3s;
       opacity: 0;
+      padding: 2rem;
+      line-height: 2.8rem;
+      text-align: center;
+      text-transform: capitalize;
+      text-shadow: 5px 0 10px rgba(0, 0, 0, 0.623);
     }
 
     &-image {
-      width: 25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20rem;
       overflow: hidden;
+      backface-visibility: hidden;
 
       &--img {
         width: 100%;

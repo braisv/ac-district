@@ -19,7 +19,22 @@ Vue.use(VueRouter)
     path: '/villagers',
     name: 'Villagers',
     component: () => import('../views/Villagers.vue')
-  }
+  },
+  {
+    path: '/villagers/:id',
+    name: 'Villager',
+    component: () => import('../views/Villager.vue')
+  },
+  {
+    path: '/fishes',
+    name: 'Fishes',
+    component: () => import('../views/Fishes.vue')
+  },
+  // {
+  //   path: '/fishes/:id',
+  //   name: 'Fish',
+  //   component: () => import('../views/Fish.vue')
+  // }
 ]
 
 const router = new VueRouter({
